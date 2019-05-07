@@ -1,0 +1,24 @@
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:8099 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to [::]:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:8099 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to [::]:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:8099 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to [::]:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:8099 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to [::]:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:8099 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: bind() to [::]:80 failed (98: Address already in use)
+2019/05/06 11:25:19 [emerg] 153#0: still could not bind()
+2019/05/06 11:26:19 [emerg] 1#0: unexpected end of parameter, expecting ";" in command line
+2019/05/06 11:37:01 [alert] 1#0: unknown process 37 exited on signal 15
+2019/05/06 13:45:38 [notice] 11#0: signal process started
+2019/05/06 13:45:38 [error] 11#0: open() "/run/nginx.pid" failed (2: No such file or directory)
+2019/05/06 13:45:38 [notice] 12#0: signal process started
+2019/05/06 13:45:38 [error] 12#0: open() "/run/nginx.pid" failed (2: No such file or directory)
+2019/05/06 13:45:38 [notice] 12#0: signal process started
+2019/05/06 13:45:38 [error] 12#0: open() "/run/nginx.pid" failed (2: No such file or directory)

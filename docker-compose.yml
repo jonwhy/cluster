@@ -1,0 +1,125 @@
+version: '2'
+services:
+    #4台服务器
+    nginx1:
+        build:
+            context: ./build/nginx_php
+        container_name: nginx1
+        expose:
+            - "9000"
+        volumes:
+            - ./conf/php56/:/usr/local/php56/etc/:rw
+            - ./httpd:/data/http/:rw
+            - ./conf/nginx:/etc/nginx/conf.d/
+            - ./log/nginx:/var/log/nginx/:rw
+        links:
+            - cluster_redis:redis
+            - cluster_mysql_master:mysql57
+        ports:
+           - "8099:8099"
+    nginx2:
+        build:
+            context: ./build/nginx_php
+        container_name: nginx2
+        expose:
+            - "9000"
+        volumes:
+            - ./conf/php56/:/usr/local/php56/etc/:rw
+            - ./httpd:/data/http/:rw
+            - ./conf/nginx:/etc/nginx/conf.d/
+            - ./log/nginx:/var/log/nginx/:rw
+        links:
+        - cluster_redis:redis
+        - cluster_mysql_master:mysql57
+    nginx3:
+        build:
+            context: ./build/nginx_php
+        image: dnmp_php56
+        container_name: nginx3
+        expose:
+            - "9000"
+        volumes:
+            - ./conf/php56/:/usr/local/php56/etc/:rw
+            - ./httpd:/data/http/:rw
+            - ./conf/nginx:/etc/nginx/conf.d/
+            - ./log/nginx:/var/log/nginx/:rw
+        links:
+            - cluster_redis:redis
+            - cluster_mysql_master:mysql57
+    nginx4:
+        build:
+            context: ./build/nginx_php
+        container_name: nginx4
+        expose:
+        - "9000"
+        volumes:
+            - ./conf/php56/:/usr/local/php56/etc/:rw
+            - ./httpd:/data/http/:rw
+            - ./conf/nginx:/etc/nginx/conf.d/
+            - ./log/nginx:/var/log/nginx/:rw
+        links:
+        - cluster_redis:redis
+        - cluster_mysql_master:mysql57
+    #redis
+    cluster_redis:
+      container_name: cluster_redis
+      image: redis:3.2.10
+    #mysql 主库
+    cluster_mysql_master:
+        image: mysql:5.7
+        container_name: cluster_mysql_master
+        volumes:
+            - ./conf/mysql:/etc/mysql/conf.d/:rw
+            - ./log/mysql:/var/log/mysql/:rw
+            - ./data/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+            MYSQL_USER: "ghhuang"
+            MYSQL_PASSWORD: "ghhuang"
+            MYSQL_DATABASE: "test"
+        ports:
+            - "13307:3306"
+        links:
+          - cluster_mysql_slave:cluster_mysql_slave
+    #mysql 从库
+    cluster_mysql_slave:
+        container_name: cluster_mysql_slave
+        image: mysql:5.7
+        volumes:
+            - ./conf/mysql_slave:/etc/mysql/conf.d/:rw
+            - ./log/mysql:/var/log/mysql/:rw
+            - ./data/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+            MYSQL_USER: "ghhuang"
+            MYSQL_PASSWORD: "ghhuang"
+            MYSQL_DATABASE: "test"
+        ports:
+            - "13308:3306"
+    #负载均衡
+    haproxy :
+        build:
+            context: ./build/haproxy
+        container_name: haproxy
+        volumes:
+            - ./conf/haproxy/:/etc/haproxy/:rw
+            - ./httpd/:/data/http:rw
+#        tty: true
+#        stdin_open: true
+        links:
+            - nginx1:nginx1
+            - nginx2:nginx2
+            - nginx3:nginx3
+        ports:
+          - "18888:80"
+          - "18889:8080"
+
+
+
+
+
+
+
+
+
+
