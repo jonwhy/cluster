@@ -16,7 +16,7 @@ services:
             - cluster_redis:redis
             - cluster_mysql_master:mysql57
         ports:
-           - "8099:8099"
+            - "8099:8099"
     nginx2:
         build:
             context: ./build/nginx_php
@@ -29,12 +29,11 @@ services:
             - ./conf/nginx:/etc/nginx/conf.d/
             - ./log/nginx:/var/log/nginx/:rw
         links:
-        - cluster_redis:redis
-        - cluster_mysql_master:mysql57
+            - cluster_redis:redis
+            - cluster_mysql_master:mysql57
     nginx3:
         build:
             context: ./build/nginx_php
-        image: dnmp_php56
         container_name: nginx3
         expose:
             - "9000"
@@ -51,15 +50,15 @@ services:
             context: ./build/nginx_php
         container_name: nginx4
         expose:
-        - "9000"
+            - "9000"
         volumes:
             - ./conf/php56/:/usr/local/php56/etc/:rw
             - ./httpd:/data/http/:rw
             - ./conf/nginx:/etc/nginx/conf.d/
             - ./log/nginx:/var/log/nginx/:rw
         links:
-        - cluster_redis:redis
-        - cluster_mysql_master:mysql57
+            - cluster_redis:redis
+            - cluster_mysql_master:mysql57
     #redis
     cluster_redis:
       container_name: cluster_redis
@@ -104,8 +103,6 @@ services:
         volumes:
             - ./conf/haproxy/:/etc/haproxy/:rw
             - ./httpd/:/data/http:rw
-#        tty: true
-#        stdin_open: true
         links:
             - nginx1:nginx1
             - nginx2:nginx2
